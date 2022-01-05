@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Create a new blog post{% endblock %}
+{% block content %}
+
+
+{% if user.is_authenticated %}
+<h1>Add post</h1>
+<br/><br/>
+<div class="form-group">
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	{{ form.media }}
+	<button class="btn btn-secondary">Post</button>
+</div>
+
+<script>
+	var name = "{{ user.id }}";
+	document.getElementById("auth").value = name;
+</script>
+
+{% else %}
+
+<h1>403 Forbidden, please login to do that</h1>
+
+{% endif %}
+{% endblock %}
